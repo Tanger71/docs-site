@@ -1,0 +1,16 @@
+<div class="quickstart-app">
+    <i>Contract: </i>
+    <pre><code class="language-java">public class HelloAvm {
+    private static String myStr = "";
+
+    @Callable
+    public static String getString() { return myStr; }
+}</code></pre>
+    <div id="defaultStringDiv">
+        <i>Default String: </i>
+        <span>
+            <input type="text" class="form-control" id="stringInput" placeholder="Enter String Here" onclick="checkWriteInput()" maxlength="30" required><br>
+            <button type="button" id="compileButton" onclick="compileButtonClicked()" class="btn btn-primary block" disabled>Compile</button>
+        </span>
+    </div>
+</div>

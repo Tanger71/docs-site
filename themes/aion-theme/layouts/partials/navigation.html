@@ -1,0 +1,372 @@
+<!--
+|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+| Sidebar
+|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+!-->
+{{ $currentPage := . }}
+<div class="col-md-4 col-xl-3 px-0">
+    <aside class="sidebar sidebar-expand-md sidebar-fullpage bg-gray px-5 br-1">
+
+        <button class="sidebar-close d-md-none" type="button">&times;</button>
+        <header class="sidebar-header">
+            <a href="/">
+                <img alt="logo" width="200" src="/img/aion-docs-logo.svg" />
+            </a>
+            <br>
+            <form action="{{ "search" | absURL }}" style="margin-top: 15px;">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ti-search"></i></span>
+                    </div>
+                    <input id="search-query" name="s" type="text" class="form-control" placeholder="Search the docs">
+                </div>
+            </form>
+        </header>
+
+        <div class="sidebar-body">
+            <nav class="nav nav-sidebar">
+                <li class="nav-item">
+                    {{ if or (eq "/developers/" $currentPage.RelPermalink) (eq "/developers" $currentPage.RelPermalink)  }} 
+                        <a class="nav-link active" href="/developers">
+                    {{ else }}
+                        <a class="nav-link" href="/developers">
+                    {{ end }}
+                            <span class="nav-link-text">Quickstart</span>
+                        </a>
+                </li>
+                 
+                <br>
+
+                <!-- Basics Start -->
+                <li class="nav-item">
+                    <span class="label">Basics</span>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <span class="nav-link-text">Compile</span>
+                        <i class="nav-angle"></i>
+                    </a>
+                    <div class="nav" {{ if hasPrefix $currentPage.File.Dir "developers/basics/compile/" }} style='display: block' {{ end }}>
+
+                        {{ range .Site.RegularPages.ByWeight }}
+                            {{ if hasPrefix .File.Dir "developers/basics/compile/" }}
+                                {{ if ne .Params.draft true }}
+
+                                    <a class="nav-link {{ if eq .Permalink $currentPage.Permalink }} active{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a>
+
+                                {{ end }}
+                            {{ end }} {{/* End hasPrefix If */}}
+                        {{ end }} {{/* End of Range */}}
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <span class="nav-link-text">Deploy</span>
+                        <i class="nav-angle"></i>
+                    </a>
+                    <div class="nav" {{ if hasPrefix $currentPage.File.Dir "developers/basics/deploy/" }} style='display: block' {{ end }}>
+                        {{ range .Site.RegularPages.ByWeight }}
+                            {{ if hasPrefix .File.Dir "developers/basics/deploy/" }}
+
+                                {{ if ne .Params.draft true }}
+                                <a class="nav-link {{ if eq .Permalink $currentPage.Permalink }} active{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a>
+                                {{ end }}
+                                    
+                            {{ end }} {{/* End hasPrefix If */}}
+                        {{ end }} {{/* End of Range */}}
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <span class="nav-link-text">Interact</span>
+                        <i class="nav-angle"></i>
+                    </a>
+                    <div class="nav" {{ if hasPrefix $currentPage.File.Dir "developers/basics/interact/" }} style='display: block' {{ end }}>
+                        {{ range .Site.RegularPages.ByWeight }}
+                            {{ if hasPrefix .File.Dir "developers/basics/interact/" }}
+
+                                {{ if ne .Params.draft true }}
+                                <a class="nav-link {{ if eq .Permalink $currentPage.Permalink }} active{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a>
+                                {{ end }}
+                                    
+                            {{ end }} {{/* End hasPrefix If */}}
+                        {{ end }} {{/* End of Range */}}
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <span class="nav-link-text">Test and Debug</span>
+                        <i class="nav-angle"></i>
+                    </a>
+                    <div class="nav" {{ if hasPrefix $currentPage.File.Dir "developers/basics/test-and-debug/" }} style='display: block' {{ end }}>
+                        {{ range .Site.RegularPages.ByWeight }}
+                            {{ if hasPrefix .File.Dir "developers/basics/test-and-debug/" }}
+
+                                {{ if ne .Params.draft true }}
+                                <a class="nav-link {{ if eq .Permalink $currentPage.Permalink }} active{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a>
+                                {{ end }}
+                                    
+                            {{ end }} {{/* End hasPrefix If */}}
+                        {{ end }} {{/* End of Range */}}
+                    </div>
+                </li>
+                <!-- Basics End -->
+
+                <!-- Fundamentals Start -->
+                <li class="nav-item">
+                    <span class="label"><a href="/developers/fundamentals/">Fundamentals</a></span>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <span class="nav-link-text">AVM Concepts</span>
+                        <i class="nav-angle"></i>
+                    </a>
+                    <div class="nav" {{ if hasPrefix $currentPage.File.Dir "developers/fundamentals/avm-concepts/" }} style='display: block' {{ end }}>
+                        {{ range .Site.RegularPages.ByWeight }}
+                            {{ if hasPrefix .File.Dir "developers/fundamentals/avm-concepts/" }}
+
+                                {{ if ne .Params.draft true }}
+                                <a class="nav-link {{ if eq .Permalink $currentPage.Permalink }} active{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a>
+                                {{ end }}
+                                    
+                            {{ end }} {{/* End hasPrefix If */}}
+                        {{ end }} {{/* End of Range */}}
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <span class="nav-link-text">Packages</span>
+                        <i class="nav-angle"></i>
+                    </a>
+                    <div class="nav" {{ if hasPrefix $currentPage.File.Dir "developers/fundamentals/packages/" }} style='display: block' {{ end }}>
+                        {{ range .Site.RegularPages.ByWeight }}
+                            {{ if hasPrefix .File.Dir "developers/fundamentals/packages/" }}
+
+                                {{ if ne .Params.draft true }}
+                                <a class="nav-link {{ if eq .Permalink $currentPage.Permalink }} active{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a>
+                                {{ end }}
+                                    
+                            {{ end }} {{/* End hasPrefix If */}}
+                        {{ end }} {{/* End of Range */}}
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <span class="nav-link-text">Contracts</span>
+                        <i class="nav-angle"></i>
+                    </a>
+                    <div class="nav" {{ if hasPrefix $currentPage.File.Dir "developers/fundamentals/contracts/" }} style='display: block' {{ end }}>
+                        {{ range .Site.RegularPages.ByWeight }}
+                            {{ if hasPrefix .File.Dir "developers/fundamentals/contracts/" }}
+
+                                {{ if ne .Params.draft true }}
+                                <a class="nav-link {{ if eq .Permalink $currentPage.Permalink }} active{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a>
+                                {{ end }}
+                                    
+                            {{ end }} {{/* End hasPrefix If */}}
+                        {{ end }} {{/* End of Range */}}
+                    </div>
+                </li>
+                <!-- /Fundamentals End -->
+
+                <!-- APIs Start -->
+                <li class="nav-item label">
+                    <span class="nav-link-text"><a href="/developers/apis/">APIs</a></span>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <span class="nav-link-text">Ethers.js</span>
+                        <i class="nav-angle"></i>
+                    </a>
+                    <div class="nav" {{ if hasPrefix $currentPage.File.Dir "developers/apis/ethers-js/" }} style='display: block' {{ end }}>
+                        {{ range .Site.RegularPages.ByWeight }}
+                            {{ if hasPrefix .File.Dir "developers/apis/ethers-js/" }}
+
+                                {{ if ne .Params.draft true }}
+                                <a class="nav-link {{ if eq .Permalink $currentPage.Permalink }} active{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a>
+                                {{ end }}
+                                    
+                            {{ end }} {{/* End hasPrefix If */}}
+                        {{ end }} {{/* End of Range */}}
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <span class="nav-link-text">Web3.js</span>
+                        <i class="nav-angle"></i>
+                    </a>
+                    <div class="nav" {{ if hasPrefix $currentPage.File.Dir "developers/apis/web3-js/" }} style='display: block' {{ end }}>
+                        {{ range .Site.RegularPages.ByWeight }}
+                            {{ if hasPrefix .File.Dir "developers/apis/web3-js/" }}
+
+                                {{ if ne .Params.draft true }}
+                                <a class="nav-link {{ if eq .Permalink $currentPage.Permalink }} active{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a>
+                                {{ end }}
+                                    
+                            {{ end }} {{/* End hasPrefix If */}}
+                        {{ end }} {{/* End of Range */}}
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="//avm-api.aion.network/">
+                        <span class="nav-link-text">AVM</span>
+                    </a>
+                </li>
+              <!-- /APIs End  -->
+
+                <!-- Nodes Start -->
+                <li class="nav-item">
+                    <span class="label"><a href="/developers/nodes">Nodes</a></span>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <span class="nav-link-text">Java</span>
+                        <i class="nav-angle"></i>
+                    </a>
+                    <div class="nav" {{ if hasPrefix $currentPage.File.Dir "developers/nodes/java/" }} style='display: block' {{ end }}>
+                        {{ range .Site.RegularPages.ByWeight }}
+                            {{ if hasPrefix .File.Dir "developers/nodes/java/" }}
+
+                                {{ if ne .Params.draft true }}
+                                <a class="nav-link {{ if eq .Permalink $currentPage.Permalink }} active{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a>
+                                {{ end }}
+                                    
+                            {{ end }} {{/* End hasPrefix If */}}
+                        {{ end }} {{/* End of Range */}}
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <span class="nav-link-text">Rust</span>
+                        <i class="nav-angle"></i>
+                    </a>
+                    <div class="nav" {{ if hasPrefix $currentPage.File.Dir "developers/nodes/rust/" }} style='display: block' {{ end }}>
+                        {{ range .Site.RegularPages.ByWeight }}
+                            {{ if hasPrefix .File.Dir "developers/nodes/rust/" }}
+
+                                {{ if ne .Params.draft true }}
+                                <a class="nav-link {{ if eq .Permalink $currentPage.Permalink }} active{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a>
+                                {{ end }}
+                                    
+                            {{ end }} {{/* End hasPrefix If */}}
+                        {{ end }} {{/* End of Range */}}
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    {{ if or (eq "/developers/nodes/avm/" $currentPage.RelPermalink) (eq "/developers/nodes/avm" $currentPage.RelPermalink)  }} 
+                        <a class="nav-link active" href="/developers/nodes/avm/">
+                    {{ else }}
+                        <a class="nav-link" href="/developers/nodes/avm/">
+                    {{ end }}
+                            <span class="nav-link-text">AVM</span>
+                        </a>
+                </li>
+
+                <li class="nav-item">
+                    {{ if or (eq "/developers/nodes/hosting-services/" $currentPage.RelPermalink) (eq "/developers/nodes/hosting-services" $currentPage.RelPermalink)  }} 
+                        <a class="nav-link active" href="/developers/nodes/hosting-services/">
+                    {{ else }}
+                        <a class="nav-link" href="/developers/nodes/hosting-services/">
+                    {{ end }}
+                            <span class="nav-link-text">Hosting Services</span>
+                        </a>
+                </li>
+                <!-- /Nodes End -->
+
+                <!-- Tools Start -->
+                <li class="nav-item">
+                    <span class="label"><a href="/developers/tools">Tools</a></span>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <span class="nav-link-text">IntelliJ Plugin</span>
+                        <i class="nav-angle"></i>
+                    </a>
+                    <div class="nav" {{ if hasPrefix $currentPage.File.Dir "developers/tools/intellij-plugin/" }} style='display: block' {{ end }}>
+                        {{ range .Site.RegularPages.ByWeight }}
+                            {{ if hasPrefix .File.Dir "developers/tools/intellij-plugin" }}
+
+                                {{ if ne .Params.draft true }}
+                                <a class="nav-link {{ if eq .Permalink $currentPage.Permalink }} active{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a>
+                                {{ end }}
+                                    
+                            {{ end }} {{/* End hasPrefix If */}}
+                        {{ end }} {{/* End of Range */}}
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <span class="nav-link-text">Maven CLI</span>
+                        <i class="nav-angle"></i>
+                    </a>
+                    <div class="nav" {{ if hasPrefix $currentPage.File.Dir "developers/tools/maven-cli/" }} style='display: block' {{ end }}>
+                        {{ range .Site.RegularPages.ByWeight }}
+                            {{ if hasPrefix .File.Dir "developers/tools/maven-cli" }}
+
+                                {{ if ne .Params.draft true }}
+                                <a class="nav-link {{ if eq .Permalink $currentPage.Permalink }} active{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a>
+                                {{ end }}
+                                    
+                            {{ end }} {{/* End hasPrefix If */}}
+                        {{ end }} {{/* End of Range */}}
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    {{ if or (eq "/developers/tools/community-tools/" $currentPage.RelPermalink) (eq "/developers/tools/community-tools" $currentPage.RelPermalink)  }} 
+                        <a class="nav-link active" href="/developers/tools/community-tools/">
+                    {{ else }}
+                        <a class="nav-link" href="/developers/tools/community-tools/">
+                    {{ end }}
+                        <span class="nav-link-text">Community Tools</span>
+                        </a>
+                </li>
+
+                <li class="nav-item">
+                    {{ if or (eq "/developers/tools/wallets/" $currentPage.RelPermalink) (eq "/developers/tools/wallets" $currentPage.RelPermalink)  }} 
+                        <a class="nav-link active" href="/developers/tools/wallets/">
+                    {{ else }}
+                        <a class="nav-link" href="/developers/tools/wallets/">
+                    {{ end }}
+                        <span class="nav-link-text">Wallets</span>
+                        </a>
+                </li>
+
+                <li class="nav-item">
+                    {{ if or (eq "/developers/tools/faucets/" $currentPage.RelPermalink) (eq "/developers/tools/faucets" $currentPage.RelPermalink)  }} 
+                        <a class="nav-link active" href="/developers/tools/faucets/">
+                    {{ else }}
+                        <a class="nav-link" href="/developers/tools/faucets/">
+                    {{ end }}
+                            <span class="nav-link-text">Faucets</span>
+                        </a>
+                </li>
+                <!-- /Fundamentals End -->
+            </nav>
+        </div>
+
+        <footer class="sidebar-footer">
+            <p>
+                <a class="social-github" href="https://github.com/aionnetwork/docs/tree/modular/{{ .File.Path }}">
+                    Edit on Github <i class="fa fa-github"></i>
+                </a>
+            </p>
+        </footer>
+
+    </aside>
+</div>

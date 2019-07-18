@@ -1,0 +1,362 @@
+<script>
+    /* Before anyone calls us out, yes we know this is cheating. But there really isn't  
+    an easy way to implement this workflow online without having to create a browser based
+    IDE, a browser based Java Tester, a browser based compiler, and then have a node
+    sat in the background with a bunch of testnet tokens, all while making things spam-proof. 
+    We're planning to actually make this process legit in the future, but right now it's
+    just here for illustrative purposes, and to teach new developers the basics of creating 
+    Java contract on Aion.
+    */
+
+    // ========================================
+    // start global vars
+    // ========================================
+    let finalString = "";
+
+    // Buttons
+    const compileButton = document.querySelector('#compileButton');
+    const testButton = document.querySelector('#testButton');
+    const createAccountButton = document.querySelector('#createAccountButton');
+    const getFundsButton = document.querySelector('#getFundsButton');
+    const deployButton = document.querySelector('#deployButton');
+    const callButton = document.querySelector('#callButton');
+    // ========================================
+    // end global vars
+    // ========================================
+    
+    // ========================================
+    // start write
+    // ========================================
+    function checkWriteInput() {
+        const stringInput = document.querySelector('#stringInput');
+        const stringOutput = document.getElementsByClassName('token string')[0];
+
+        const stringHandler = function (e) {
+            if(e.target.value.match(/^[a-zA-Z0-9 ]+$/)) {
+                stringOutput.innerHTML = `"${e.target.value}"`;
+            }
+            if(stringOutput.innerHTML.length > 1) {
+                compileButton.disabled = false;
+            }
+        }
+
+        stringInput.addEventListener('input', stringHandler);
+        stringInput.addEventListener('propertychange', stringHandler);
+    }
+
+    async function compileButtonClicked() {
+        const stringInput = document.querySelector('#stringInput');
+        const defaultStringDiv = document.querySelector('#defaultStringDiv');
+
+        defaultStringDiv.innerHTML = `<i>Compilation Output: </i><pre><code class="language-java" id="compileOutput"></code></pre>`;
+        const compileOutput = document.querySelector('#compileOutput');
+
+        compileOutput.innerHTML = `[INFO] Building exampleContract 1.0-SNAPSHOT`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] --- maven-install-plugin:2.5:install-file (default) @ exampleContract ---`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] pom.xml not found in avm.jar`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] Installing avm.jar to avm-1.0-SNAPSHOT.jar`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ exampleContract ---`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] Using 'UTF-8' encoding to copy filtered resources.`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ exampleContract ---`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] Changes detected - recompiling the module!`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] Compiling 1 source file to /classes`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ exampleContract ---`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] Using 'UTF-8' encoding to copy filtered resources.`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ exampleContract ---`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] Changes detected - recompiling the module!`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] Compiling 1 source file to /test-classes`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] --- maven-surefire-plugin:3.0.0-M3:test (default-test) @ exampleContract ---`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO]  T E S T S`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] Running aion.ExampleContractTest`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `Output from transaction 0000000000000000000000000000000000000000000000000000000000000000`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `Current string is " "`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `Output from transaction 0000000000000000000000000000000000000000000000000000000000000000`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `New string is "Hello World"`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `Output from transaction 0000000000000000000000000000000000000000000000000000000000000000`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `Current string is "Hello World"`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.618 s - in aion.ExampleContractTest`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] --- aion4j-maven-plugin:0.6.7:postpack (default) @ exampleContract ---`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] Post compile the jar >> /exampleContract/target/exampleContract-1.0-SNAPSHOT.jar`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] Optimizing the jar content >> /exampleContract/target/exampleContract-1.0-SNAPSHOT.jar`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] --- maven-install-plugin:2.5:install (default-install) @ exampleContract ---`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] Installing pom.xml to 1.0-SNAPSHOT exampleContract-1.0-SNAPSHOT.pom`
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        compileOutput.innerHTML = `[INFO] ------------------------------------------------------------------------`
+        await sleep(33);
+        compileOutput.innerHTML += `\n[INFO] BUILD SUCCESS`
+        await sleep(33);
+        await sleep(33);
+        compileOutput.innerHTML += `\n[INFO] Finished at: ${new Date()}`
+        await sleep(33);
+        compileOutput.innerHTML += `\n[INFO] ------------------------------------------------------------------------`
+
+
+        compileButton.disabled = true;
+
+        finalString = stringInput.value;
+        compileButton.innerHTML = "Contract Compiled"
+        testButton.disabled = false;
+    }
+    // ========================================
+    // end write
+    // ========================================
+
+    // ========================================
+    // start test
+    // ========================================
+    async function runTests() {
+        const testPanel = document.querySelector('#testPanel');
+        let firstRand = Math.floor((Math.random() * 300) + 100);
+        let secondRand = Math.floor((Math.random() * 500) + 300);
+        let thirdRand = Math.floor((Math.random() * 600) + 300);
+        let totalRand = firstRand + secondRand + thirdRand;
+
+        testButton.innerHTML = "Testing";
+        testButton.disabled = true;
+
+        testPanel.innerHTML = `/Library/Java/JavaVirtualMachines/jdk-11.jdk/Contents/Home/Bin/java`;
+        await sleep(firstRand);
+        testPanel.innerHTML += `\n\nConnected to the target VM, address: '127.0.0.1:53028', transport: 'socket'`;
+        await sleep(secondRand);
+        testPanel.innerHTML += `\nDisconnected from the target VM, address: '127.0.0.1:53028', transport: 'socket' `;
+        await sleep(thirdRand);
+        testPanel.innerHTML += `\nProcess finished with exit code 0`;
+        await sleep(4);
+        testPanel.innerHTML += `\n\n ✅ Tests Passed: 1 of 1 test ~ ${totalRand}ms`;
+
+        testButton.innerHTML = "Tests Passed";
+        createAccountButton.disabled = false;
+    }
+    // ========================================
+    // end test
+    // ========================================
+
+    // ========================================
+    // start load an account
+    // ========================================    
+    function createAnAccount() {
+        const accountAddressOutput = document.querySelector('#accountAddressOutput');
+
+        createAccountButton.disabled = true;
+
+        {{/*  const web3 = new Web3(new Web3.providers.HttpProvider("https://aion.api.nodesmith.io/v1/mastery/jsonrpc?apiKey=ab40c8f567874400a69c1e80a1399350"));
+        const account = web3.eth.accounts.create(web3.utils.randomHex(32));
+        console.log("Here's the account object, for those of you who like sneaking around in the browser console: \n", account);  */}}
+
+        const addresses = [
+            '0xa0d5d84518b6c03b10d80c7ae5a1e60457d3c5d9489c3a48a480a1bb289bf667', 
+            '0xa052913f5046e97b437631040dfe69dae35c11fc93e670bfac8fd1f6cf740c56', 
+            '0xa01df8b6d4a4a51154a482fb42b51812199b2080bde31aa6e8d1f15370973e9a',
+            '0xa012f26ca394b82a0287c5593dfa03f55b4502f2bcbe6638bbf23f7f5bd2b397',
+            '0xa0960f20319bb2ab44083f5db602b36a21d928649e582a1b835a2e550a0358f9',
+            '0xa0914a8e4586aff1f1dfb07758708aa73b88248b5a0cc87cc62b5d22c7a957c9',
+            '0xa0b48f567182c1fa4389ff22ec9bc38793538f97e8bba220aee485ff2ac5c384',
+            '0xa0fe8769e7939f38ba268611ab980d431b69ca77f7738b0ba0b17b7138bc46e6',
+            '0xa0c78e7ac0afcc1b2ca82db5843c739239f03dd3382c71d9ca846b391d147545',
+            '0xa0155dcd7b9e1a99722da477d404a60578d605243a47761829b8aa144386818e',
+            '0xa0090e991155f8b09f3d2ab2c830ef01922c1770172aeb5224030ddfb7a020c5',
+            '0xa08a1b8ae3ab176a8e117b53b1b1b452b43e0de5c23b1c331bf8f3c561768ec9',
+            '0xa0915c309dd76c7e2769be1b1ef531a936508fde979dc791a247bb76e83bce51',
+            '0xa0fb1991448db7a473507949c7c04a3eea39ae01e45caa117a31a9b346c8340f',
+            '0xa04c0f83cc4105e098e38a0356a9a01d71db2cc4c1d9af3dc0cc44f99b0af064',
+            '0xa013dc31dd1b3182996ea476170a6bf9b926f4b63c1989df7a4d3a7929ab56ed',
+            '0xa00f5550171ba961e5bfeff9f97bb1bd7fc61948474ec0f1f52aa6ef1768374e',
+            '0xa0228022e93028ca39a435d398c7657613b0150f7b1c8cad3c8425a93c06cfd4',
+            '0xa01ab6196acbfdbddd4af6e07edbf44242790c33816e6359b9f297d8cfb4a6cb',
+            '0xa097ecc852122bcba76ab83f1914f2a693ab01b060306ceab84253b9a80014f0',
+        ];
+
+        address = addresses[Math.floor(Math.random()*addresses.length)];
+
+        createAccountButton.innerHTML = "Account Created";
+        accountAddressOutput.innerHTML = address;
+        getFundsButton.disabled = false;
+    }
+
+    async function getFunds() {
+        const balanceOutput = document.querySelector('#balanceOutput');
+        const accountAddress = document.querySelector('#accountAddressOutput').innerHTML;
+
+        getFundsButton.disabled = true;
+        balanceOutput.innerHTML = "Requesting funds...";
+
+        await sleep(Math.floor((Math.random() * 500) + 300));
+        balanceOutput.innerHTML = "10 AION";
+        deployButton.disabled = false;
+    }
+    // ========================================
+    // end load an account
+    // ========================================
+
+    // ========================================
+    // start deploy
+    // ========================================
+    async function deploy(){
+        const deployOutput = document.querySelector('#deployOutput');
+
+        deployButton.innerHTML = "Deploying";
+        deployButton.disabled = true;
+
+        deployOutput.innerHTML = " ";
+        
+        deployOutput.innerHTML = "[INFO] ------------------------------------------------------------------------";;
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] Building exampleContract 1.0-SNAPSHOT";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] ------------------------------------------------------------------------";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ exampleContract ---";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] --- aion4j-maven-plugin:0.6.7:clean (default) @ exampleContract ---";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] --- aion4j-maven-plugin:0.6.7:init (default) @ exampleContract ---";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] --- maven-install-plugin:2.5:install-file (default) @ exampleContract ---";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] pom.xml not found in avm.jar";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ exampleContract ---";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] Using 'UTF-8' encoding to copy filtered resources.";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ exampleContract ---";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] Changes detected - recompiling the module!";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ exampleContract ---";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] Using 'UTF-8' encoding to copy filtered resources.";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ exampleContract ---";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] Changes detected - recompiling the module!";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] --- maven-surefire-plugin:3.0.0-M3:test (default-test) @ exampleContract ---";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] Tests are skipped.";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] --- aion4j-maven-plugin:0.6.7:prepack (default) @ exampleContract ---";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] Extracting  org-aion-avm-userlib.jar in classes folder for packaging";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ exampleContract ---";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] Building jar: contract";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] --- aion4j-maven-plugin:0.6.7:postpack (default) @ exampleContract ---";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] Post compile the jar >> contract";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] Optimizing the jar content >> contract";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] --- aion4j-maven-plugin:0.6.7:deploy (default-cli) @ exampleContract ---";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "Created default account a092de3423a1e77f4c5f8500564e3601759143b7c0e652a7012d35eb67b283ca with balance 100000000000000";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] Deploying contract to remote node ...";
+        await sleep(Math.floor((Math.random() * 2500) + 2000));
+        deployOutput.innerHTML = "[INFO] ****************  dAppdeployment status ****************";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] Contract Address: 0b2260914e069f3c38e1974bbdf0b7d7cfa3ecaf08622f917bed06f5d06cc194";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] Energy used: 669766";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] Deployer Address: 0xa092de3423a1e77f4c5f8500564e3601759143b7c0e652a7012d35eb67b283ca";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] *********************************************************";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] contract was deployed successfully to the embedded AVM.";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        deployOutput.innerHTML = "[INFO] BUILD SUCCESS";
+        
+        deployButton.innerHTML = "Contract Deployed";
+        callButton.disabled = false;
+    }
+    // ========================================
+    // end deploy
+    // ========================================
+    
+    // ========================================
+    // start call
+    // ========================================
+    async function call() {
+        const callOutput = document.querySelector('#callOutput');
+
+        callButton.disabled = true;
+        callButton.innerHTML = "Calling";
+        
+        callOutput.innerHTML = " ";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        callOutput.innerHTML = "[INFO] ------------------------------------------------------------------------";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        callOutput.innerHTML = "[INFO] Building exampleContract 1.0-SNAPSHOT";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        callOutput.innerHTML = "[INFO] ------------------------------------------------------------------------";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        callOutput.innerHTML = "[INFO] ";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        callOutput.innerHTML = "[INFO] --- aion4j-maven-plugin:0.6.7:call (default-cli) @ exampleContract ---";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        callOutput.innerHTML = "[INFO] Contract Address : 0b2260914e069f3c38e1974bbdf0b7d7cfa3ecaf08622f917bed06f5d06cc194";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        callOutput.innerHTML = "[INFO] Method           : getString";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        callOutput.innerHTML = "[INFO] Arguments        : null";
+        await sleep(Math.floor((Math.random() * 100) + 10));
+        callOutput.innerHTML = "[INFO] Calling contract method ...";
+        await sleep(Math.floor((Math.random() * 2000) + 1000));
+        callOutput.innerHTML = `[INFO] ****************  Method call result  ****************`;
+        callOutput.innerHTML += `\n[INFO] Data       : ${ finalString }`;
+        await sleep(Math.floor((Math.random() * 70) + 10));
+        callOutput.innerHTML += `\n[INFO] Energy used: 45869`;
+        await sleep(Math.floor((Math.random() * 70) + 10));
+        callOutput.innerHTML += `\n[INFO] *********************************************************`;
+        await sleep(Math.floor((Math.random() * 70) + 10));
+        callOutput.innerHTML += `\n[INFO] Method call successful`;
+
+        callButton.disabled = false;
+        callButton.innerHTML = "Call Again";
+    }
+    // ========================================
+    // end call
+    // ========================================
+
+    // ========================================
+    // start global functions
+    // ========================================
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    // ========================================
+    // end global functions
+    // ========================================
+</script>

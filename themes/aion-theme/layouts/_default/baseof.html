@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+        {{- partial "head.html" . -}}
+
+<body>
+
+    <!-- Mobile Navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark d-md-none bb-1" data-navbar="fixed">
+        <div class="container justify-content-start">
+            <button class="btn-menu" data-toggle="sidebar" type="button">&#9776;</button>
+            <a class="navbar-brand" href="/">
+                <img class="logo-dark" src="/img/logo-dark.png" alt="logo">
+                <img class="logo-light" src="/img/logo-light.png" alt="logo">
+            </a>
+        </div>
+    </nav>
+    <!-- END Mobile Navbar -->
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container-fluid px-0">
+            <div class="row mx-0">
+
+                {{- partial "navigation.html" . -}}
+
+                <!--
+                |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+                | Content
+                |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+                !-->
+                <div class="col-md-7 col-xl-8 ml-md-auto py-8">
+                    <article>
+                    <br>
+                    {{ block "main" . }}
+
+                        {{ if .Params.header_image }}
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h1 class="main-header">{{ .Title }}</h1>
+                                <p class="lead-2">{{ .Description }}</p>
+
+                                <br>
+
+                                {{ partial "table-of-contents" . }}
+                            </div>
+                            <div class="col-md-6">
+                                <img src="{{ .Params.header_image }}">
+                            </div>
+                        </div>
+
+                        {{ else }}
+
+                            <h1>{{ .Title }}</h1>
+                            <p class="lead-2">{{ .Description }}</p>
+
+                            <br>
+
+                            {{ partial "table-of-contents" . }}
+
+                        {{ end }}
+
+                        <hr>
+
+                        {{ .Content }}
+
+                        {{ if .Params.next_page }}
+                        <p class="text-right fw-400">
+                            <a class="text-inherit" href="{{ .Params.next_page }}">Next <i class="ti-arrow-right small-4 ml-1"></i></a>
+                        </p>
+                        {{ end }} {{/* end of next page if statement */}}
+                        
+                    {{ end }} {{/* end of main block */}}
+                </article>
+                </div>
+            </div>
+        </div>
+    </main><!-- /.main-content -->
+
+    {{- partial "scripts.html" . -}}
+
+</body>
+
+</html>

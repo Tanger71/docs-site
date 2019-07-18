@@ -1,0 +1,13 @@
+<div class="quickstart-app">
+    <i>Test Class: </i>
+    <pre class="language-java"><code class="language-java">@Test
+public void testGetString() {
+    byte[] txData = ABIUtil.encodeMethodArguments("getString");
+    AvmRule.ResultWrapper result = avmRule.call(from, dappAddr, BigInteger.ZERO, txData);
+    ResultCode status = result.getReceiptStatus();
+    Assert.assertTrue(status.isSuccess());
+}</code></pre>
+    <i>Test Results: </i>
+    <pre class="language-bash"><code class="language-bash" id="testPanel"> </code></pre>
+    <button type="button" id="testButton" class="btn btn-primary block" onclick="runTests()" disabled>Run Test</button>    
+</div>

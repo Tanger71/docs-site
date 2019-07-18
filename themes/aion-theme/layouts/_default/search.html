@@ -1,0 +1,14 @@
+{{ define "main" }}
+
+<h1>{{ .Title }}</h1>
+<h3>You Search for <code id="search_query"></code></h3>
+<hr>
+<div id="results_table">
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.0/fuse.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js"></script>
+<script src="{{ "js/search.js" | absURL }}"></script>
+
+{{ end }}

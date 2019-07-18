@@ -1,0 +1,83 @@
+{{/* The Hugo version of the table of contents is super broken. So we've got this snippet here to manually go through
+each page and grab all the <h2></h2> tags and make a Table of Contents out of them. Lines ~6 and ~19 can be uncommented
+to include more than just <h2></h2> tags if needed in the future. */}}
+{{ if .Params.table_of_contents }}
+
+    {{ $headers := findRE "<h[2].*?>(.|\n])+?</h[2]>" .Content }}
+    {{/* Uncomment the line below and comment the line above to add more than just <h2> tags into the Table of Contents. */}}
+    {{/* $headers := findRE "<h[2-4].*?>(.|\n])+?</h[2-4]>" .Content */}}
+
+    {{ $numHeaders := len $headers }}
+    {{ $hasHeaders := ge $numHeaders 1 }}
+
+    {{ if $hasHeaders }}
+    <h6>Sections in this article</h6>
+    <nav id="top-toc" class="nav nav-toc-1 my-4">
+        {{ range $i, $header := $headers }}
+
+        {{ $currentHeaderLevelString := index (findRE "[2]" $header 1) 0 }}
+        {{/*  Uncomment the line below and comment the line above to add more than just <h2> tags into the Table of Contents. */}}
+        {{/* $currentHeaderLevelString := index (findRE "[2-4]" $header 1) 0 */}}
+
+        {{ $currentHeaderLevel := len (seq $currentHeaderLevelString) }}
+        {{ $anchorId := (replaceRE  "[’/_]" "-" ($header | htmlUnescape | plainify | htmlEscape)) | urlize }}
+        {{ $listItemTitle := $header | htmlUnescape | plainify | htmlEscape }}
+        {{ $listItemOpen := safeHTML (printf "<a class='nav-link' href='#%s'>%s</a>" $anchorId $listItemTitle) }}
+        {{ $lastItemIndex := sub $numHeaders 1 }}
+
+        {{/* case: there is only one header */}}
+        {{ if lt $numHeaders 2 }}
+            {{ $listItemOpen }}
+        {{ else }}
+
+            {{/* case: more than 1 header, first header */}}
+            {{ if lt $i 1 }}
+            {{ $listItemOpen }}
+
+            {{/* case: more than 1 header, not first header */}}
+            {{ else }}
+            {{ $previousHeader := index $headers (sub $i 1) }}
+            {{ $previousHeaderLevelString := index (findRE "[2-4]" $previousHeader 1) 0 }}
+            {{ $previousHeaderLevel := len (seq $previousHeaderLevelString) }}
+
+            {{/* case: header is at the same level as the previous header */}}
+            {{ if eq $currentHeaderLevel $previousHeaderLevel }}
+                </li>
+                {{ $listItemOpen }}
+            
+            {{/* case: header is higher than the previous header (e.g. h3 where previous header is h2) */}}
+            {{/* a header should never be more than 1 higher than the previous h2 -> h3 -> h4 */}}
+            {{ else if gt $currentHeaderLevel $previousHeaderLevel }}
+                <ol>
+                {{ $listItemOpen }}
+
+            {{/* case: header level is lower than the previous header (e.g. h2 where previous header is h4) */}}
+            {{/* the previous header may be multiple levels different, h2 can legitimately follow a h4 */}}
+            {{ else if lt $currentHeaderLevel $previousHeaderLevel }}
+                {{/* close the <li> of the previous header */}}
+                </li>
+
+                {{/* close the <ol>s and <li>s of the previous headers */}}
+                {{ $headerLevelDifference := sub $previousHeaderLevel $currentHeaderLevel }}
+                {{ range (seq $headerLevelDifference) }}
+                </ol></li>
+                {{ end }}
+                
+                {{ $listItemOpen }}
+
+            {{ end }}
+            
+            {{ end }}
+            {{/* end if based on first or not first header */}}
+
+        {{ end }}
+        {{/* end if numhHeaders > 1 */}}
+
+        {{ end }}
+        {{/* end range headers */}}
+        
+    </nav>
+    {{ end }}
+    {{/* end if has headers */}}
+
+{{ end }}

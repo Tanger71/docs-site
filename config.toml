@@ -1,0 +1,7 @@
+baseURL = "/"
+languageCode = "en-us"
+title = "Aion Docs"
+theme = "aion-theme"
+
+[outputs]
+    home = ["HTML", "RSS", "JSON"]
