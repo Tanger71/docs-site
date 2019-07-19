@@ -13,7 +13,7 @@
     --indigo: #7a63db; /*aion*/
     --purple: #4221cc; /*aion*/
     --pink: #e83e8c;
-    --red: #ff4954;
+    --red: #E0003B; /*aion*/
     --orange: #ffbe00;
     --yellow: #ffba00;
     --green: #3cd458;
@@ -23471,6 +23471,17 @@ main article {
 .sidebar-header .dropdown {
     margin-top: -3px;
     margin-bottom: 10px;
+}
+
+/* Start Rebuilding Button */
+.btn-start-rebuilding {
+    color: #ffffff;
+    background-image: linear-gradient(45deg, var(--purple) 0%, var(--red) 100%);
+}
+
+.btn-start-rebuilding:hover {
+    color: white;
+    box-shadow: 5px 10px 8px #d1ced8;
 }
 
 /* Homepage Cards */
