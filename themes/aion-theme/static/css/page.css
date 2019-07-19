@@ -16695,7 +16695,6 @@ button:focus {
 }
 
 .nav-sidebar .nav-angle {
-    font-family: themify;
     font-style: normal;
     font-size: 8px;
     display: inline-block;
@@ -16708,7 +16707,7 @@ button:focus {
 }
 
 .nav-sidebar .nav-angle::before {
-    content: "\e649"
+    content: "▶"
 }
 
 .nav-sidebar .nav-angle.rotate {
