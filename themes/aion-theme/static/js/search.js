@@ -57,7 +57,7 @@ function executeSearch(searchQuery) {
 function printResult(result) {
     results_table.innerHTML += `<h3><a href="${result.item.permalink}">${result.item.title}</a></h3>`;
     if(result.item.description) {
-        results_table.innerHTML += `<p>${result.item.description.substring(0, 300)}...</a></p>`;
+        results_table.innerHTML += `<p>${result.item.description.substring(0, 300)}...</p>`;
     } else {
         results_table.innerHTML += `<p><i>Cannot display page contents.</i></p>`;
     }
