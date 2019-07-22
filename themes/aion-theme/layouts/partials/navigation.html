@@ -25,22 +25,21 @@
 
         <div class="sidebar-body">
             <nav class="nav nav-sidebar">
-                <li class="nav-item">
-                    {{ if or (eq "/developers/" $currentPage.RelPermalink) (eq "/developers" $currentPage.RelPermalink)  }} 
-                        <a class="nav-link active" href="/developers">
-                    {{ else }}
-                        <a class="nav-link" href="/developers">
-                    {{ end }}
-                            <span class="nav-link-text">Quickstart</span>
-                        </a>
-                </li>
-                 
-                <br>
-
+                
                 <!-- Basics Start -->
                 <li class="nav-item">
                     <span class="label"><a href="/developers/basics">Basics</a></span>
                 </li>
+
+                <li class="nav-item">
+                        {{ if or (eq "/developers/" $currentPage.RelPermalink) (eq "/developers" $currentPage.RelPermalink)  }} 
+                            <a class="nav-link active" href="/developers">
+                        {{ else }}
+                            <a class="nav-link" href="/developers">
+                        {{ end }}
+                                <span class="nav-link-text">Quickstart</span>
+                            </a>
+                    </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="#">
