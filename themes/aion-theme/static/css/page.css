@@ -11,6 +11,7 @@
 :root {
     --blue: var(--purple);
     --indigo: #7a63db; /*aion*/
+    --dark-indigo: #12173A; /*aion*/
     --purple: #4221cc; /*aion*/
     --pink: #e83e8c;
     --red: #E0003B; /*aion*/
@@ -23525,7 +23526,7 @@ main article {
 
 /* Footer */
 footer {
-    background: #4221cc;
+    background: var(--dark-indigo);
     color: #fff;
     padding-top: 50px;
 }
