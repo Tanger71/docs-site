@@ -66,15 +66,15 @@
 
                         {{ .Content }}
 
+                        {{ end }} {{/* end of main block */}}
+                        <hr>
+
                         {{ if .Params.next_page }}
                         <p class="text-right fw-400">
-                            <a class="text-inherit" href="{{ .Params.next_page }}">Next <i
-                                    class="ti-arrow-right small-4 ml-1"></i></a>
+                            <a class="text-inherit" href="{{ .Params.next_page }}"><button type="button" class="btn btn-primary">Next Page</button></a>
                         </p>
                         {{ end }} {{/* end of next page if statement */}}
 
-                        {{ end }} {{/* end of main block */}}
-                        <hr>
                         {{- partial "footer.html" . -}}
                     </article>
                 </div>
