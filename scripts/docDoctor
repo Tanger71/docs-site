@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ ! -d "node_modules" ] && echo -e "\e[92minstalling dependencies...\e[0m" && npm install markdown-spellcheck markdownlint-cli markdown-link-check write-good check-filename yaml-front-matter && npm install
+[ ! -d "node_modules" ] && echo -e "\e[92minstalling dependencies...\e[0m" && npm install markdown-spellcheck markdownlint-cli markdown-link-check write-good check-filename yaml-front-matter json && npm install
 
 echo -e "\e[1m\e[92m💊  Beginning checkup...\e[0m"
 
